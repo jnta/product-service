@@ -5,9 +5,9 @@ import com.jonata.productservice.dto.ProductResponse;
 import com.jonata.productservice.model.Product;
 import com.jonata.productservice.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -29,9 +29,8 @@ public class ProductService {
         log.info("Product {} has been saved.", product.getId());
     }
 
-    public Page<ProductResponse> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable)
-                .map(product -> mapToProductResponse(product));
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll().stream().map(product -> mapToProductResponse(product)).toList();
 
     }
 
