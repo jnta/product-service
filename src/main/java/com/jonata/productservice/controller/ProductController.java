@@ -24,9 +24,26 @@ public class ProductController {
         productService.createProduct(productRequest);
     }
 
+    @GetMapping("/{id}")
+    public ProductResponse getProduct(@PathVariable("id") String id) {
+        return productService.getProduct(id);
+    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ProductResponse> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateProduct(@PathVariable("id") String id, @RequestBody ProductRequest productRequest) {
+        productService.updateProduct(id, productRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProduct(@PathVariable("id") String id) {
+        productService.deleteProduct(id);
     }
 }
